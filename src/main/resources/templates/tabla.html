@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Listado de vacantes</title>
+</head>
+<body>
+
+	<!-- PARA PONER COSAS QUE ESTAN EN NUESTRA CARPETA src/main/resources static -->
+	<!--  
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<script th:src="@{/js/funciones.js}"></script>
+	<img th:src="@{/img/foto.png}" width="123">
+	-->
+	
+	<img th:src="@{/images/images.jpg}" width="123" height="123">
+	<h1 class="text-primary">Listado de vacantes</h1>
+	
+	<table class="table table-bordered table-hover">
+		<tr>
+			<th>Logo</th>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>Descripcion</th>
+			<th>Salario</th>
+			<th>Fecha de publicacion</th>
+			<th>Destacada</th>
+			<th>Detalle</th>
+			<th>Borrar</th>
+		</tr>
+		
+		
+		  
+		<tr th:each="vacante : ${vacantes} ">
+			<td>
+				<img th:src="@{/images/{img} ( img=${vacante.imagen} )}" width="130">
+			</td>
+			<td th:text="${vacante.id}"></td>
+			<td th:text="${vacante.nombre}"></td>
+			<td th:text="${vacante.descripcion}"></td>
+			<td th:text="${vacante.salario}"></td>
+			<td th:text="${vacante.fecha}"></td>
+			<td> 
+				<span th:if="${vacante.destacado==1}" class="badge bg-success">Si</span>
+				<span th:unless="${vacante.destacado==1}" class="badge bg-danger">No</span>
+			</td>
+			<td>
+				<a th:href="@{/vacantes/view/{id} (id=${vacante.id})}" class="btn btn-success">Detalle</a>
+			</td>
+			<td>
+				<a th:href="@{/vacantes/delete(id=${vacante.id})}" class="btn btn-danger">Borrar</a>
+			</td>
+			<!-- 
+			<td th:text="${vacante.destacado == 1 ? 'Si' : 'No'}"></td>
+			
+			<td th:text="${vacante.destacado}"></td>
+			-->
+		</tr>
+		
+	</table>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
